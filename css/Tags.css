@@ -1,0 +1,107 @@
+/* wrapper for a tag set */
+.itemTagWrapper {
+	margin: 0 0 10px;
+	padding: 10px;
+	border: solid 1px #AAA;
+	border-radius: 10px;
+	width: 300px;
+	min-height: 40px;
+	position: relative;
+	background: #FFF;
+}
+
+.itemTagWrapper.transparent {
+	background: none;
+	border: none;
+	padding: 0;
+}
+
+/* ul element that contains each tag */
+.itemTagList {
+	padding: 0;
+	position: relative;
+	overflow: auto;
+}
+
+/* default style for all tag list items */
+.itemTagList li {
+	margin: 0 4px 8px 0;
+	padding: 0 1px;
+	list-style: none;
+	background: #DDD;
+	color: #000;
+	min-width: 65px;
+	height: 20px;
+	float: left;
+	border: solid 1px #AAA;
+	border-radius: 5px;
+}
+
+/* the add tag list item looks different... */
+.itemTagList li.addTagItem {
+	background: #F90;
+	color: #FFF;
+}
+/* ... and the link requires a bit of specialization */
+.itemTagList li.addTagItem .addTagBtn {
+	display: block;
+	padding: 3px;	
+	text-align: center;
+	cursor: pointer;
+}
+
+/* style for the text label of each tag */
+.itemTagList li .tagLabel {
+	padding: 3px;
+	display: block;
+	height: 12px;
+	float: left;
+}
+
+/* style to use if the label is being edited (or added) */
+.itemTagList li .tagLabel.edit{
+	padding: 0;
+	height: 18px;
+}
+
+/* when editing, this is the input element style */
+.itemTagList li .tagLabel .tagLabelInput {
+	margin: 1px 5px 0 0;
+	padding: 0;
+	max-width: 85px;
+	height: 18px;
+	/* box sizing helps all browsers to render similarly */
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+/* style for the tag submit button (in edit mode) */
+.itemTagList li .tagSubmitBtn {
+	margin: 1px 0 0 0;
+	display: block;
+	float: right;
+	cursor: pointer;
+	/*width: 18px; /* setting a width will only look good if button uses an image, not text */
+	height: 18px;
+	border-width: 1px;
+	border-radius: 5px;
+	border-color: #EEE #EEE #AAA #AAA;	
+	background: #CCC;
+}
+
+/* style for the tag delete button (always visible) */
+.itemTagList li .tagDeleteBtn {
+	border: none;
+	margin: 2px 0 0 0;
+	padding: 0;
+	cursor: pointer;
+	display: block;
+	width: 16px;
+	height: 16px;
+	float: right;
+	background: url("../svg/icon_remove_x.svg") no-repeat;
+	background-size: contain;
+
+	
+}

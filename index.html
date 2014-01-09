@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Keyword Tags Component</title>
+
+		<style type="text/css">
+		/*css reset*/
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		ul {
+			padding: 0 0 0 20px;
+		}
+
+		html,body {
+			width: 100%;
+			height: 100%;
+		}
+
+		body {
+			font-family: sans-serif;
+			font-size: 12px;
+		}
+
+		/* setting this to use border-box makes them apply sizes/padding/margins equally across browsers */
+		input, select, textarea {
+			box-sizing: border-box;
+			-moz-box-sizing: border-box;
+		}
+
+		p {
+			margin: 0 0 10px;
+		}
+
+		/*end css reset*/
+
+		section {
+			margin: 10px 10px 20px;
+		}
+
+		.tagOutput {
+			margin: 10px 0;
+			padding: 5px;
+			
+			bottom: 0;
+			min-height: 35px;
+			min-width: 200px;
+			background: #DDD;
+		}
+
+		#dynTagSets {
+			padding: 10px 0 10px 10px;
+			border: solid 1px #AAA;
+			width: 350px;
+			height: 500px;
+			overflow: auto;
+			background: #555;
+		}
+		</style>
+		<link rel="stylesheet" type="text/css" href="css/Tags.css" />
+
+		<script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="js/Tags.js"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+
+				// we only need one!
+				var myTags = new Tags({});
+
+				// manually do two tag sets, the HTML is already provided in this doc
+				myTags.setTags('setOne', ['set1.tagOne','set1.tagTwo','set1.tagThree']);
+				myTags.setTags('setTwo', ['set2.tag1','set2.tag2','set2.tag3']);
+
+				// lets make 10 tag sets to show how easy it is for dynamic multiples, HTML not included
+				for(var i=0; i<=10; i++){
+					// create arrays to use in each tag set
+					var tagArr = [];
+					for(var t=0;t<=5;t++){ tagArr.push('set'+i+'.tag'+t); }
+					// add the markup to support it
+					$('#dynTagSets').append('<div class="itemTagWrapper"><ul class="itemTagList" id="tagSet_'+i+'"></ul></div>');
+					// add this tag set to our tags widget
+					myTags.setTags('tagSet_'+i, tagArr);
+				}
+
+				// attach event handlers to show how we can retrieve tags
+				$('#getTagList').bind('click', function(){
+					console.log(myTags.getAllTags());
+					$('#tagList').html("Check the console to see the full object -&gt;");
+				});
+
+				$('#getTagList_setOne').bind('click', function(){
+					$('#tagList_setOne').html(myTags.getTagsByTagSetId('setOne').toString());
+				});
+
+				$('#getTagList_setTwo').bind('click', function(){
+					$('#tagList_setTwo').html(myTags.getTagsByTagSetId('setTwo').toString());
+				});				
+
+			});
+		</script>
+
+		
+
+	</head>
+	<body>
+		<h1>Keyword Tagging Component</h1>
+
+		<section>
+			<h2>One object to rule them all...</h2>
+			<div class="tagOutput">
+				<p>Because all tag sets can be handled by one object, we can get ALL tags to save at once: <button id="getTagList">Get All</button></p>
+				<p id="tagList"></p>
+			</div>
+		</section>
+		
+		<section>
+			<h2>Multiple TagSets - created manually</h2>
+			<p>The HTML for these tag sets is already in this HTML doc. The tag sets are registered via JS since any existing tags would come from data.</p>
+			<div class="itemTagWrapper">
+				<ul class="itemTagList" id="tagSet_setOne"></ul>
+				<div class="tagOutput">
+					<p>We can also get tags from just this tag set: <button id="getTagList_setOne">Do It!</button></p>
+					<p id="tagList_setOne"></p>
+				</div>
+			</div>
+
+			<div class="itemTagWrapper">
+				<ul class="itemTagList" id="tagSet_setTwo"></ul>
+				<div class="tagOutput">
+					<p>We can also get tags from just this tag set: <button id="getTagList_setTwo">Do It!</button></p>
+					<p id="tagList_setTwo"></p>
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<h2>Multiple TagSets - created dynamically</h2>
+			<p>This list of tag sets was created within a for loop. The HTML and tag set registration were done via JS.</p>
+			<div id="dynTagSets"></div>
+		</section>
+	</body>
+</html>
